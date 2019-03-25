@@ -86,29 +86,25 @@
             url: queryURL,
             method: "GET"
           }).then(function (response) {
+            var gifs = response.data;
             var wrapperDiv = $("<div>");
-            for (var i = 0; i < 10; i++) {
-              var source = {};
-              source.animated = response.data[i].images.fixed_height.url;
-              source.still = response.data[i].images.fixed_height_still.url;
-              imgSources.push(source);
-              var image = $("<img>").attr("data-state", "animated");
-              images.push(image);
-              images[i].attr("src", imgSources[i].animated);
-              images[i].click(function(){
-                var state = $(this).data("state");
-                if (state === "animated"){
-                  $(this).data("state", "still");
-                  $(this).attr("src", imgSources[i].still)
-                } else {
-                  $(this).data("state", "animated");
-                  $(this).attr("src", imgSources[i].animated);
+            gifs.forEach(function(gif) {
+              console.log(gif);
+              var img = $("<img>").attr("src", gif.images.fixed_height.url);
+              img.attr("data-state", "animated");
+              img.click(function(){
+                switch($(this).attr("data-state")) {
+                  case "animated":
+                    $(this).attr("data-state", "still");
+                    $(this).attr("src", gif.images.fixed_height_still.url);
+                    break;
+                  case "still":
+                    $(this).attr("data-state", "animated");
+                    $(this).attr("src", gif.images.fixed_height.url);
                 }
-                console.log(this);
               })
-              image.addClass("gifImgClass");
-              wrapperDiv.append(images[i]);
-            }
+              wrapperDiv.append(img);
+            })
             $("#gifImage").html(wrapperDiv);
           });
         })
