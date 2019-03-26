@@ -91,13 +91,14 @@
 
             var wrapperDiv = $("<div>");
             gifs.forEach(function(gif) {
-              var gRating = $("<div>").attr("data-rating", gif.rating);
+              var gRating = $("<div>").text(gif.rating);
               console.log(gRating);
               console.log(gif);
               console.log(gifs);
 
               var img = $("<img>").attr("src", gif.images.fixed_height.url);
               img.attr("data-state", "animated");
+
               img.click(function(){
                 switch($(this).attr("data-state")) {
                   case "animated":
@@ -109,8 +110,8 @@
                     $(this).attr("src", gif.images.fixed_height.url);
                 }
               })
-              wrapperDiv.append(img);
-              wrapperDiv.prepend(gRating);
+              wrapperDiv.append(img, gRating);
+              // wrapperDiv.prepend(gRating);
             })
             $("#gifImage").html(wrapperDiv);
           });
