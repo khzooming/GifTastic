@@ -27,6 +27,7 @@
 
     <!-- Gif images will get dumped here -->
     <div id="gifImage"></div>
+    <br></br>
   </div>
 
 
@@ -87,9 +88,14 @@
             method: "GET"
           }).then(function (response) {
             var gifs = response.data;
+
             var wrapperDiv = $("<div>");
             gifs.forEach(function(gif) {
+              var gRating = $("<div>").attr("data-rating", gif.rating);
+              console.log(gRating);
               console.log(gif);
+              console.log(gifs);
+
               var img = $("<img>").attr("src", gif.images.fixed_height.url);
               img.attr("data-state", "animated");
               img.click(function(){
@@ -104,6 +110,7 @@
                 }
               })
               wrapperDiv.append(img);
+              wrapperDiv.prepend(gRating);
             })
             $("#gifImage").html(wrapperDiv);
           });
@@ -122,33 +129,10 @@
 
 
 
-        // $(tenImages) = pullGitData(butnTopic);
-
-      //   for (i = 0; i < butnTopic.length; i++) {
-      //   console.log(butnTopic.data)
-      //   console.log("hi from line 112");
-      // }
-      // });
-
-
-
-      // var top = $("<button>");
-      //     $("#buttons-view").append(top);
-      //     top.addClass("gifTopic");
-
-      //     // Adding a data-attribute with a value from array
-      //     top.attr("data-name", topics[i]);
-      //     // Providing the button's text with a value from array
-      //     top.text(topics[i]);
 
 
 
 
-                // $.ajax({
-                //   url: queryURL,
-                //   method: "GET"
-                // }).then(function(response) {
-                //   $("#movie-view").text(JSON.stringify(response));
 
 
         // Deletes the movies prior to adding new movies
@@ -172,25 +156,12 @@
 
 <!-- API key GIPHY = X3NRL2r2wTw6jM1ZcmdBZ6rBkn0LveSY -->
 
-<!-- Make sure you switch the protocol in the query URL from **`http to https`**, 
-// or the app may not work properly when deployed to Github Pages.
-// Use a for loop with the array
-// Create button for every topics array item - use append
+<!--        
 
-
-// 3. When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.
-
-// Each topics button should grab a gif url
-// - make the url static using attributes of animated and static like we did in the activities Friday
-//   -  pausing-gifs.html file - use for this one
-
-// 4. When the user clicks one of the still GIPHY images, the gif should animate. If the user clicks the gif again, it should stop playing.
-// this is like the Friday activity
-       
 // 5. Under every gif, display its rating (PG, G, so on).
 //     * This data is provided by the GIPHY API.-->
 
-
+ 
 
 
 <!--     
